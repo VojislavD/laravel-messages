@@ -3,12 +3,18 @@
     "description": "Laravel messages system",
     "license": "MIT",
     "require": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "livewire/livewire": "^2.10"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.1",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
             "VojislavD\\LaravelMessages\\": "src"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
