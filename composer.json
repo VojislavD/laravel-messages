@@ -1,0 +1,14 @@
+{
+    "name": "vojislavd/laravel-messages",
+    "description": "Laravel messages system",
+    "license": "MIT",
+    "require": {
+        "php": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "VojislavD\\LaravelMessages\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}
