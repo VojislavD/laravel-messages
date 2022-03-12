@@ -15,7 +15,7 @@ class LaravelMessagesServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views/livewire', 'laravel-messages');
         Livewire::component('messages', Messages::class);
+        $this->loadViewsFrom(__DIR__.'/../resources/views/livewire', 'laravel-messages');
     }
 }
