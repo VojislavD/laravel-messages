@@ -4,7 +4,7 @@ namespace VojislavD\LaravelMessages;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use VojislavD\LaravelMessages\Http\Livewire\Messages;
+use VojislavD\LaravelMessages\Http\Livewire\Inbox;
 
 class LaravelMessagesServiceProvider extends ServiceProvider
 {
@@ -15,7 +15,7 @@ class LaravelMessagesServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        Livewire::component('messages', Messages::class);
+        Livewire::component('inbox', Inbox::class);
         $this->loadViewsFrom(__DIR__.'/../resources/views/livewire', 'laravel-messages');
     }
 }
