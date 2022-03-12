@@ -3,6 +3,8 @@
 namespace VojislavD\LaravelMessages;
 
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
+use VojislavD\LaravelMessages\Http\Livewire\Messages;
 
 class LaravelMessagesServiceProvider extends ServiceProvider
 {
@@ -13,6 +15,6 @@ class LaravelMessagesServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        
+        Livewire::component('messages', Messages::class);
     }
 }
