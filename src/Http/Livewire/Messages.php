@@ -8,8 +8,6 @@ class Messages extends Component
 {
     public function render()
     {
-        return <<<'blade'
-            <div>Test Messages</div>
-        blade;
+        return view('laravel-messages::messages');
     }
 }
