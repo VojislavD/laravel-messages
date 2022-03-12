@@ -15,6 +15,13 @@
             "VojislavD\\LaravelMessages\\": "src"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "VojislavD\\LaravelMessages\\LaravelMessagesServiceProvider\\"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
