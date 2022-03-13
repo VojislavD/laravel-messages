@@ -15,7 +15,7 @@ class Thread extends Model
 
     public function otherParticipant()
     {
-        return $this->participiants()->whereNot('user_id', User::first()->id);
+        return $this->participiants()->whereNot('user_id', auth()->id());
     }
 
     public function otherParticipantName(): Attribute
