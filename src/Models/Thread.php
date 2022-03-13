@@ -24,4 +24,16 @@ class Thread extends Model
             get: fn () => $this->otherParticipant()->first()->name
         );
     }
+
+    public function otherParticipantProfileImage(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->otherParticipant()->first()->profile_photo_url
+        );
+    }
+
+    public function unreadMessagesCount()
+    {
+        return 2;
+    }
 }

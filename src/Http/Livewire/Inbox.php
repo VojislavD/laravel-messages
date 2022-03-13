@@ -8,7 +8,7 @@ class Inbox extends Component
 {
     public function render()
     {
-        $threads = auth()->user()->threads()->with('otherParticipant')->get();
+        $threads = auth()->user()->threads()->with('otherParticipant')->latest()->get();
 
         return view('laravel-messages::inbox', [
             'threads' => $threads
