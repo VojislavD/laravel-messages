@@ -5,39 +5,21 @@
             <span class="font-semibold">Conversations</span>
         </div>
         <div class="h-[650px] overflow-y-auto">
-            <button class="w-full py-3 flex items-center justify-between px-2 my-2 hover:bg-blue-500 hover:bg-opacity-20 cursor-pointer">
-                <div class="flex items-center">
-                    <img src="https://images.unsplash.com/photo-1552162864-987ac51d1177?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" class="rounded-full w-10">
-                    <span class="ml-3">Annie Baker</span>
-                    <span class="w-3 h-3 bg-green-600 ml-2 rounded-full" title="Online"></span>
-                </div>
-                <div class="flex flex-col items-end justify-start">
-                    <span class="text-sm text-gray-500">10:54PM</span>
-                    <span class="bg-blue-600 text-gray-100 text-sm px-2 py-0.5 mt-0.5 rounded-full font-semibold">1</span>
-                </div>
-            </button>
-            <button class="w-full py-3 flex items-center justify-between px-2 my-2 hover:bg-blue-500 hover:bg-opacity-20 cursor-pointer">
-                <div class="flex items-center">
-                    <img src="https://images.unsplash.com/photo-1552162864-987ac51d1177?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" class="rounded-full w-10">
-                    <span class="ml-3">Annie Baker</span>
-                    <span class="w-3 h-3 bg-green-600 ml-2 rounded-full" title="Online"></span>
-                </div>
-                <div class="flex flex-col items-end justify-start">
-                    <span class="text-sm text-gray-500">10:54PM</span>
-                    <span class="bg-blue-600 text-gray-100 text-sm px-2 py-0.5 mt-0.5 rounded-full font-semibold">1</span>
-                </div>
-            </button>
-            <button class="w-full py-3 flex items-center justify-between px-2 my-2 hover:bg-blue-500 hover:bg-opacity-20 cursor-pointer">
-                <div class="flex items-center">
-                    <img src="https://images.unsplash.com/photo-1552162864-987ac51d1177?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" class="rounded-full w-10">
-                    <span class="ml-3">Annie Baker</span>
-                    <span class="w-3 h-3 bg-green-600 ml-2 rounded-full" title="Online"></span>
-                </div>
-                <div class="flex flex-col items-end justify-start">
-                    <span class="text-sm text-gray-500">10:54PM</span>
-                    <span class="bg-blue-600 text-gray-100 text-sm px-2 py-0.5 mt-0.5 rounded-full font-semibold">1</span>
-                </div>
-            </button>
+            @forelse ($threads as $thread)
+                <button class="w-full py-3 flex items-center justify-between px-2 my-2 hover:bg-blue-500 hover:bg-opacity-20 cursor-pointer">
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1552162864-987ac51d1177?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" class="rounded-full w-10">
+                        <span class="ml-3">{{ $thread->otherParticipantName }}</span>
+                        <span class="w-3 h-3 bg-green-600 ml-2 rounded-full" title="Online"></span>
+                    </div>
+                    <div class="flex flex-col items-end justify-start">
+                        <span class="text-sm text-gray-500">10:54PM</span>
+                        <span class="bg-blue-600 text-gray-100 text-sm px-2 py-0.5 mt-0.5 rounded-full font-semibold">1</span>
+                    </div>
+                </button>
+            @empty
+                <p class="text-gray-600 p-4 text-center">{{ __('There are no any threads yet.') }}</p>
+            @endforelse
         </div>
     </div>
     <div class="w-3/4 h-full border border-gray-300 rounded-xl flex flex-col justify-between block shadow-xl" :class="activeMessage === 1 ? 'block' : 'hidden'">

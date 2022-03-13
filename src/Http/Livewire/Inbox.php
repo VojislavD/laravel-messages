@@ -8,6 +8,10 @@ class Inbox extends Component
 {
     public function render()
     {
-        return view('laravel-messages::inbox');
+        $threads = \App\Models\User::first()->threads()->with('otherParticipant')->get();
+
+        return view('laravel-messages::inbox', [
+            'threads' => $threads
+        ]);
     }
 }
