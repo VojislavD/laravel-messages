@@ -13,6 +13,11 @@ class Thread extends Model
         return $this->belongsToMany(User::class, 'thread_participants');
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
     public function otherParticipant()
     {
         return $this->participiants()->whereNot('user_id', auth()->id());
