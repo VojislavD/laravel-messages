@@ -4,6 +4,7 @@ namespace VojislavD\LaravelMessages\Http\Livewire;
 
 use Livewire\Component;
 use VojislavD\LaravelMessages\Contracts\CreatesMessage;
+use VojislavD\LaravelMessages\Contracts\MarksMessageAsSeen;
 use VojislavD\LaravelMessages\Models\Message;
 use VojislavD\LaravelMessages\Models\Thread;
 
@@ -13,6 +14,8 @@ class Inbox extends Component
 
     public $state = [];
 
+    protected $listeners = ['refreshComponent' => '$refresh'];
+
     protected $rules = [
         'state.body' => ['required', 'string', 'max:5000']
     ];
@@ -21,25 +24,11 @@ class Inbox extends Component
         'state.body' => 'body'
     ];
 
-    protected $listeners = ['refreshComponent' => '$refresh'];
-
-    public function selectThread(Thread $thread)
+    public function selectThread(Thread $thread, MarksMessageAsSeen $updater)
     {
         $this->thread = $thread;
-        $this->markMessagesAsSeen();
 
-    }
-
-    private function markMessagesAsSeen()
-    {
-        $this->thread
-            ->messages
-            ->where('user_id', '!=', auth()->id())
-            ->each(function ($message) {
-            $message->update([
-                'seen' => now()
-            ]);
-        });
+        $updater($thread);
     }
 
     public function submit(CreatesMessage $creator)

@@ -6,12 +6,15 @@ use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use VojislavD\LaravelMessages\Contracts\CreatesMessage;
 use VojislavD\LaravelMessages\Actions\CreateMessage;
+use VojislavD\LaravelMessages\Actions\MarkMessageAsSeen;
+use VojislavD\LaravelMessages\Contracts\MarksMessageAsSeen;
 use VojislavD\LaravelMessages\Http\Livewire\Inbox;
 
 class LaravelMessagesServiceProvider extends ServiceProvider
 {
     public $bindings = [
-        CreatesMessage::class => CreateMessage::class
+        CreatesMessage::class => CreateMessage::class,
+        MarksMessageAsSeen::class => MarkMessageAsSeen::class
     ];
 
     public function register()

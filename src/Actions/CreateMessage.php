@@ -6,7 +6,7 @@ use VojislavD\LaravelMessages\Contracts\CreatesMessage;
 use VojislavD\LaravelMessages\Models\Message;
 use VojislavD\LaravelMessages\Models\Thread;
 
-class createMessage implements CreatesMessage
+class CreateMessage implements CreatesMessage
 {
     public function __invoke(Thread $thread, string $body)
     {
