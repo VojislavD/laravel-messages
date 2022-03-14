@@ -3,10 +3,10 @@
     "description": "Laravel messages system",
     "license": "MIT",
     "require": {
-        "php": "^8.0",
-        "livewire/livewire": "^2.10"
+        "php": "^8.0"
     },
     "require-dev": {
+        "livewire/livewire": "^2.10",
         "orchestra/testbench": "^7.1",
         "phpunit/phpunit": "^9.5"
     },
