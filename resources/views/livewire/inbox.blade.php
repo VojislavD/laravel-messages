@@ -24,8 +24,8 @@
                         <span class="ml-3">{{ $thread->otherParticipantName }}</span>
                     </div>
                     <div class="flex flex-col items-end justify-start">
-                        @if ($thread->unreadMessagesCount())
                         <span class="text-xs text-gray-500">{{ $thread->updated_at->toFormattedDateString() }}</span>
+                        @if ($thread->unreadMessagesCount())
                             <span class="bg-blue-600 text-gray-100 text-sm px-2 py-0.5 mt-0.5 rounded-full font-semibold">{{ $thread->unreadMessagesCount() }}</span>
                         @endif
                     </div>
@@ -46,52 +46,57 @@
             @if($messages)
                 <h5 class="h-[60px] text-lg p-3.5 border-b-2 font-semibold">{{ __('To') }}: {{ $thread->otherParticipantName }}</h5>
                 <div class="h-[650] flex-1 p-4 border-b-2 space-y-8 overflow-y-auto custom-scrollbar">
-                    @foreach ($messages as $message)
-                        @if($message->user->id === auth()->id())
-                            <div class="flex flex-col items-end">
-                                <div class="w-3/4 2xl:w-1/2 flex justify-end  space-x-1">
-                                    <div>
-                                        <div class="bg-blue-100 p-4 rounded-lg">
-                                            {{ $message->body }}
+                    @foreach ($messages as $messagesByDay)
+                        <p class="text-center text-xs text-gray-500">
+                            {{ $messagesByDay->first()->created_at->toFormattedDateString() }}
+                        </p>
+                        @foreach($messagesByDay as $message)
+                            @if($message->user->id === auth()->id())
+                                <div class="flex flex-col items-end">
+                                    <div class="w-3/4 2xl:w-1/2 flex justify-end  space-x-1">
+                                        <div>
+                                            <div class="bg-blue-100 p-4 rounded-lg">
+                                                {{ $message->body }}
+                                            </div>
+                                            <div class="flex mt-0.5">
+                                                <span class="text-gray-400 text-sm">
+                                                    {{ $message->created_at->format('H:i a') }}
+                                                </span>
+                                                <div 
+                                                    class="flex items-center justify-center ml-1 @if($message->seen) text-green-600 @else text-gray-400 @endif" 
+                                                    title="@if($message->seen) Seen @else Not Seen @endif"
+                                                >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="flex mt-0.5">
-                                            <span class="text-gray-400 text-sm">
-                                                {{ $message->created_at->format('H:i a') }}
-                                            </span>
-                                            <div 
-                                                class="flex items-center justify-center ml-1 @if($message->seen) text-green-600 @else text-gray-400 @endif" 
-                                                title="@if($message->seen) Seen @else Not Seen @endif"
-                                            >
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <img src="{{ $message->user->profile_photo_url }}" class="w-10 h-10 rounded-full">
+                                    </div>
+                                </div>
+                            @else
+                                <div class="flex flex-col">
+                                    <div class="w-3/4 2xl:w-1/2 flex space-x-1">
+                                        <img src="{{ $message->user->profile_photo_url }}" class="w-10 h-10 rounded-full">
+                                        <div>
+                                            <div class="bg-blue-100 p-4 rounded-lg">
+                                                {{ $message->body }}
+                                            </div>
+                                            <div class="flex justify-end mt-0.5">
+                                                <span class="text-gray-400 text-sm">
+                                                    {{ $message->created_at->format('H:i a') }}
+                                                </span>
+                                                <div 
+                                                    class="flex items-center justify-center ml-1 @if($message->seen) text-green-600 @else text-gray-400 @endif" 
+                                                    title="@if($message->seen) Seen @else Not Seen @endif"
+                                                >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <img src="{{ $message->user->profile_photo_url }}" class="w-10 h-10 rounded-full">
                                 </div>
-                            </div>
-                        @else
-                            <div class="flex flex-col">
-                                <div class="w-3/4 2xl:w-1/2 flex space-x-1">
-                                    <img src="{{ $message->user->profile_photo_url }}" class="w-10 h-10 rounded-full">
-                                    <div>
-                                        <div class="bg-blue-100 p-4 rounded-lg">
-                                            {{ $message->body }}
-                                        </div>
-                                        <div class="flex justify-end mt-0.5">
-                                            <span class="text-gray-400 text-sm">
-                                                {{ $message->created_at->format('H:i a') }}
-                                            </span>
-                                            <div 
-                                                class="flex items-center justify-center ml-1 @if($message->seen) text-green-600 @else text-gray-400 @endif" 
-                                                title="@if($message->seen) Seen @else Not Seen @endif"
-                                            >
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
+                            @endif
+                        @endforeach
                     @endforeach
                 </div>
                 <div class="p-4">

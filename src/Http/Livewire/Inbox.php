@@ -28,7 +28,7 @@ class Inbox extends Component
     public function render()
     {
         $threads = auth()->user()->threads()->with('otherParticipant')->latest()->get();
-        $messages = $this->thread?->messages;
+        $messages = $this->thread?->messages->groupBy(fn ($message) => $message->created_at->format('Y-m-d'));
 
         return view('laravel-messages::inbox', [
             'threads' => $threads,
