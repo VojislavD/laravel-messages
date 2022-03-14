@@ -7,6 +7,8 @@ use App\Models\User;
 
 class Message extends Model
 {
+    protected $fillable = ['seen'];
+    
     public function thread()
     {
         return $this->belongsTo(Thread::class);

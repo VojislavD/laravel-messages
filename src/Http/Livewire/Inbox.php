@@ -12,6 +12,17 @@ class Inbox extends Component
     public function selectThread(Thread $thread)
     {
         $this->thread = $thread;
+        $this->markMessagesAsSeen();
+
+    }
+
+    private function markMessagesAsSeen()
+    {
+        $this->thread->messages->each(function ($message) {
+            $message->update([
+                'seen' => now()
+            ]);
+        });
     }
 
     public function render()
