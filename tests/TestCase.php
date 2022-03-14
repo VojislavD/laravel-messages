@@ -3,6 +3,7 @@
 namespace VojislavD\LaravelMessages\Tests;
 
 use VojislavD\LaravelMessages\Providers\LaravelMessagesServiceProvider;
+use Livewire\LivewireServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -19,6 +20,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     public function getPackageProviders($app)
     {
         return [
+            LivewireServiceProvider::class,
             LaravelMessagesServiceProvider::class
         ];
     }
