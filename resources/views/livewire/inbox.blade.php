@@ -73,7 +73,7 @@
                                 <div class="flex flex-col items-end">
                                     <div class="w-3/4 2xl:w-1/2 flex justify-end  space-x-1">
                                         <div>
-                                            <div class="bg-blue-100 p-4 rounded-lg">
+                                            <div class="bg-blue-200 p-4 rounded-lg">
                                                 {{ $message->body }}
                                             </div>
                                             <div class="flex mt-0.5">
@@ -102,7 +102,7 @@
                                             class="w-10 h-10 rounded-full"
                                         >
                                         <div>
-                                            <div class="bg-blue-100 p-4 rounded-lg">
+                                            <div class="bg-gray-200 p-4 rounded-lg">
                                                 {{ $message->body }}
                                             </div>
                                             <div class="flex justify-end mt-0.5">
@@ -129,7 +129,7 @@
                                 {{ $message }}
                             @enderror
                         </div>
-                        <button class=" bg-blue-600 hover:bg-blue-800 rounded-lg mt-4 px-10 py-1.5 text-gray-100 hover:shadow-xl transition duration-150">
+                        <button class="bg-blue-600 hover:bg-blue-800 rounded-lg mt-4 px-10 py-1.5 text-gray-100 hover:shadow-xl transition duration-150">
                             {{ __('Send') }}
                         </button>
                     </div>
