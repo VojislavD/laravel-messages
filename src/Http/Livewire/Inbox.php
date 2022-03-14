@@ -29,7 +29,10 @@ class Inbox extends Component
 
     private function markMessagesAsSeen()
     {
-        $this->thread->messages->each(function ($message) {
+        $this->thread
+            ->messages
+            ->where('user_id', '!=', auth()->id())
+            ->each(function ($message) {
             $message->update([
                 'seen' => now()
             ]);
@@ -45,6 +48,8 @@ class Inbox extends Component
             'user_id' => auth()->user()->id,
             'body' => $this->state['body']
         ]);
+
+        $this->reset(['state']);
     }
 
     public function render()
