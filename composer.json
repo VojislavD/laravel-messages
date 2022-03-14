@@ -14,6 +14,17 @@
             "VojislavD\\LaravelMessages\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "VojislavD\\LaravelMessages\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "laravel": {
             "providers": [
