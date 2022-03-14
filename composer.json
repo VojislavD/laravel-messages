@@ -3,7 +3,8 @@
     "description": "Laravel messages system",
     "license": "MIT",
     "require": {
-        "php": "^8.0"
+        "php": "^8.0",
+        "livewire/livewire": "^2.10"
     },
     "require-dev": {
         "orchestra/testbench": "^7.1",
@@ -28,7 +29,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VojislavD\\LaravelMessages\\LaravelMessagesServiceProvider"
+                "VojislavD\\LaravelMessages\\Providers\\LaravelMessagesServiceProvider",
+                "VojislavD\\LaravelMessages\\Providers\\ActionServiceProvider"
             ]
         }
     },

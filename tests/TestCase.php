@@ -2,7 +2,7 @@
 
 namespace VojislavD\LaravelMessages\Tests;
 
-use VojislavD\LaravelMessages\LaravelMessagesServiceProvider;
+use VojislavD\LaravelMessages\Providers\LaravelMessagesServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
