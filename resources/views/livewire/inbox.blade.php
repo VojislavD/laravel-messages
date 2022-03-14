@@ -1,5 +1,5 @@
 <div 
-    x-data="{ threadSelected: false }"
+    x-data="{ threadSelected: true }"
     class="max-w-7xl mx-auto flex space-x-4 h-[720px]"
 >
     <div class="w-1/4 h-full border border-gray-300 bg-white rounded-lg">
@@ -63,7 +63,11 @@
                 <h5 class="h-[60px] text-lg p-3.5 border-b-2 font-semibold">
                     {{ __('To') }}: {{ $thread->otherParticipantName }}
                 </h5>
-                <div class="h-[650] flex-1 p-4 border-b-2 space-y-8 overflow-y-auto custom-scrollbar">
+                <div 
+                    id="messages"
+                    x-init="document.getElementById('messages').scrollTo(0, 650)"
+                    class="h-[650] flex-1 p-4 border-b-2 space-y-8 overflow-y-auto custom-scrollbar" 
+                >
                     @foreach ($messages as $messagesByDay)
                         <p class="text-center text-xs text-gray-500">
                             {{ $messagesByDay->first()->created_at->toFormattedDateString() }}
