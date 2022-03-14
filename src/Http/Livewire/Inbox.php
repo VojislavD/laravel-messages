@@ -13,12 +13,14 @@ class Inbox extends Component
     public $state = [];
 
     protected $rules = [
-        'state.body' => ['required']
+        'state.body' => ['required', 'string', 'max:5000']
     ];
 
     protected $validationAttributes = [
         'state.body' => 'body'
     ];
+
+    protected $listeners = ['refreshComponent' => '$refresh'];
 
     public function selectThread(Thread $thread)
     {
@@ -50,6 +52,8 @@ class Inbox extends Component
         ]);
 
         $this->reset(['state']);
+
+        $this->emit('refreshComponent');
     }
 
     public function render()

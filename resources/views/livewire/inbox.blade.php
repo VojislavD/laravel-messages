@@ -65,7 +65,7 @@
                 </h5>
                 <div 
                     id="messages"
-                    x-init="document.getElementById('messages').scrollTo(0, 650)"
+                    x-init="document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight"
                     class="h-[650] flex-1 p-4 border-b-2 space-y-8 overflow-y-auto custom-scrollbar" 
                 >
                     @foreach ($messages as $messagesByDay)
