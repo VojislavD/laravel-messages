@@ -39,6 +39,10 @@ class LaravelMessagesServiceProvider extends ServiceProvider
             $migrations[__DIR__.'/../database/migrations/create_thread_participants_table.stub'] = database_path('migrations/'. date('Y_m_d_His', time()+1). '_create_thread_participants_table.php');
         }
 
+        if (! in_array('create_messages_table.php', $existingMigrations)) {
+            $migrations[__DIR__.'/../database/migrations/create_messages_table.stub'] = database_path('migrations/'. date('Y_m_d_His', time()+1). '_create_messages_table.php');
+        }
+
         return $migrations;
     }
     
