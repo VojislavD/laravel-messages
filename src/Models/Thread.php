@@ -39,6 +39,6 @@ class Thread extends Model
 
     public function unreadMessagesCount()
     {
-        return 2;
+        return $this->messages->whereNull('seen')->count();
     }
 }
