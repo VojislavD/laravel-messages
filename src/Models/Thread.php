@@ -15,7 +15,7 @@ class Thread extends Model
 
     public function messages()
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Message::class)->oldest();
     }
 
     public function otherParticipant()
