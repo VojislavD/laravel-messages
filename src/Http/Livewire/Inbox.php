@@ -3,11 +3,22 @@
 namespace VojislavD\LaravelMessages\Http\Livewire;
 
 use Livewire\Component;
+use VojislavD\LaravelMessages\Models\Message;
 use VojislavD\LaravelMessages\Models\Thread;
 
 class Inbox extends Component
 {
     public $thread;
+
+    public $state = [];
+
+    protected $rules = [
+        'state.body' => ['required']
+    ];
+
+    protected $validationAttributes = [
+        'state.body' => 'body'
+    ];
 
     public function selectThread(Thread $thread)
     {
@@ -23,6 +34,17 @@ class Inbox extends Component
                 'seen' => now()
             ]);
         });
+    }
+
+    public function submit()
+    {
+        $this->validate();
+
+        Message::create([
+            'thread_id' => $this->thread->id,
+            'user_id' => auth()->user()->id,
+            'body' => $this->state['body']
+        ]);
     }
 
     public function render()

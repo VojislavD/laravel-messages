@@ -7,7 +7,12 @@ use App\Models\User;
 
 class Message extends Model
 {
-    protected $fillable = ['seen'];
+    protected $fillable = [
+        'thread_id',
+        'user_id',
+        'body',
+        'seen'
+    ];
     
     public function thread()
     {
