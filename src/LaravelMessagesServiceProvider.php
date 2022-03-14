@@ -4,10 +4,16 @@ namespace VojislavD\LaravelMessages;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use VojislavD\LaravelMessages\Contracts\CreatesMessage;
+use VojislavD\LaravelMessages\Actions\CreateMessage;
 use VojislavD\LaravelMessages\Http\Livewire\Inbox;
 
 class LaravelMessagesServiceProvider extends ServiceProvider
 {
+    public $bindings = [
+        CreatesMessage::class => CreateMessage::class
+    ];
+
     public function register()
     {
         

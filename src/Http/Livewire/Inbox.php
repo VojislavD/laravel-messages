@@ -3,6 +3,7 @@
 namespace VojislavD\LaravelMessages\Http\Livewire;
 
 use Livewire\Component;
+use VojislavD\LaravelMessages\Contracts\CreatesMessage;
 use VojislavD\LaravelMessages\Models\Message;
 use VojislavD\LaravelMessages\Models\Thread;
 
@@ -41,15 +42,11 @@ class Inbox extends Component
         });
     }
 
-    public function submit()
+    public function submit(CreatesMessage $creator)
     {
         $this->validate();
 
-        Message::create([
-            'thread_id' => $this->thread->id,
-            'user_id' => auth()->user()->id,
-            'body' => $this->state['body']
-        ]);
+        $creator($this->thread, $this->state['body']);
 
         $this->reset(['state']);
 
