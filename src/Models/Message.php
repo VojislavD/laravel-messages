@@ -11,7 +11,7 @@ class Message extends Model
         'thread_id',
         'user_id',
         'body',
-        'seen'
+        'seen_at'
     ];
     
     public function thread()

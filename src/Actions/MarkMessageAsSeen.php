@@ -14,7 +14,7 @@ class MarkMessageAsSeen implements MarksMessageAsSeen
             ->where('user_id', '!=', auth()->id())
             ->each(function ($message) {
                 $message->update([
-                    'seen' => now()
+                    'seen_at' => now()
                 ]);
             });
     }

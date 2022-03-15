@@ -41,7 +41,7 @@ class Thread extends Model
     {
         return $this->messages
             ->where('user_id', '!=', auth()->id())
-            ->whereNull('seen')
+            ->whereNull('seen_at')
             ->count();
     }
 }

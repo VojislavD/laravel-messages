@@ -85,8 +85,8 @@
                                                     {{ $message->created_at->format('H:i a') }}
                                                 </span>
                                                 <div 
-                                                    class="flex items-center justify-center ml-1 @if($message->seen) text-green-600 @else text-gray-400 @endif" 
-                                                    title="@if($message->seen) Seen @else Not Seen @endif"
+                                                    class="flex items-center justify-center ml-1 @if($message->seen_at) text-green-600 @else text-gray-400 @endif" 
+                                                    title="@if($message->seen_at) Seen @else Not Seen @endif"
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                                                 </div>
