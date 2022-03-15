@@ -16,13 +16,16 @@ class Inbox extends Component
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    protected $rules = [
-        'state.body' => ['required', 'string', 'max:5000']
-    ];
-
     protected $validationAttributes = [
         'state.body' => 'body'
     ];
+
+    public function rules()
+    {
+        return [
+            'state.body' => ['required', 'string', 'max:5000']
+        ];
+    }
 
     public function selectThread(Thread $thread, MarksMessageAsSeen $updater)
     {
