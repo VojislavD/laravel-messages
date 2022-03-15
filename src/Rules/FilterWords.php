@@ -25,24 +25,25 @@ class FilterWords implements Rule
      */
     public function passes($attribute, $value)
     {
-        $config = $this->getConfig();
+        $exact = config('messages.validation.filter.exact');
+        $contain = config('messages.validation.filter.contain');
 
-        if (empty($config['exact']) && empty($config['contain'])) {
+        if (empty($exact) && empty($contain)) {
             return true;
         }
 
         $words = explode(' ', $value);
 
-        if (!empty($config['exact'])) {
+        if (!empty($exact)) {
             foreach ($words as $word) {
-                if (in_array($word, $config['exact'])) {
+                if (in_array($word, $exact)) {
                     return false;
                 }
             }
         }
 
-        if (!empty($config['contain'])) {
-            foreach ($config['contain'] as $containWord) {
+        if (!empty($contain)) {
+            foreach ($contain as $containWord) {
                 if (str_contains($value, $containWord)) {
                     return false;
                 }
@@ -60,22 +61,5 @@ class FilterWords implements Rule
     public function message()
     {
         return 'The :attribute have one or more forbidden words.';
-    }
-
-    private function getConfig()
-    {
-        $config = [];
-
-        if (file_exists(config_path('messages.php'))) {
-            $config['exact'] = config('messages.validation.filter.exact');
-            $config['contain'] = config('messages.validation.filter.contain');
-        } else {
-            $messages = require_once(__DIR__.'/../../config/messages.php');
-
-            $config['exact'] = $messages['validation']['filter']['exact'];
-            $config['contain'] = $messages['validation']['filter']['contain'];
-        }
-
-        return $config;
     }
 }

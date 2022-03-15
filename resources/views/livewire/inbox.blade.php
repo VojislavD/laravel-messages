@@ -1,4 +1,5 @@
 <div 
+    @if($autoUpdate) {{ $wirePoll }} @endif
     x-data="{ threadSelected: false }"
     class="max-w-7xl mx-auto flex space-x-4 h-[720px]"
 >

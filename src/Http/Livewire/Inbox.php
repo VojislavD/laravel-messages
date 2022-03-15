@@ -10,8 +10,12 @@ use VojislavD\LaravelMessages\Rules\FilterWords;
 
 class Inbox extends Component
 {
-    public $thread;
+    public $autoUpdate;
 
+    public $wirePoll;
+
+    public $thread;
+    
     public $state = [];
 
     protected $listeners = ['refreshComponent' => '$refresh'];
@@ -19,6 +23,12 @@ class Inbox extends Component
     protected $validationAttributes = [
         'state.body' => 'body'
     ];
+
+    public function mount()
+    {
+        $this->autoUpdate = config('messages.update.auto');
+        $this->wirePoll = "wire:poll.".config('messages.update.time') ."ms";
+    }
 
     public function rules()
     {
