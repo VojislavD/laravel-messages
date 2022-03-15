@@ -33,15 +33,19 @@ class FilterWords implements Rule
 
         $words = explode(' ', $value);
 
-        foreach ($words as $word) {
-            if (in_array($word, $config['exact'])) {
-                return false;
+        if (!empty($config['exact'])) {
+            foreach ($words as $word) {
+                if (in_array($word, $config['exact'])) {
+                    return false;
+                }
             }
         }
 
-        foreach ($config['contain'] as $containWord) {
-            if (str_contains($value, $containWord)) {
-                return false;
+        if (!empty($config['contain'])) {
+            foreach ($config['contain'] as $containWord) {
+                if (str_contains($value, $containWord)) {
+                    return false;
+                }
             }
         }
 
@@ -63,8 +67,8 @@ class FilterWords implements Rule
         $config = [];
 
         if (file_exists(config_path('messages.php'))) {
-            $config['exact'] = config_path('messages.validation.filter.exact');
-            $config['contain'] = config_path('messages.validation.filter.contain');
+            $config['exact'] = config('messages.validation.filter.exact');
+            $config['contain'] = config('messages.validation.filter.contain');
         } else {
             $messages = require_once(__DIR__.'/../../config/messages.php');
 
