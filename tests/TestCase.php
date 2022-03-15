@@ -29,9 +29,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     public function tearDown(): void
     {
-        parent::tearDown();
-        $this->cleanState();
         $this->tearDownDatabase($this->app);
+        $this->cleanState();
+        parent::tearDown();
 
     }
 
