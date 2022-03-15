@@ -16,12 +16,12 @@ class CreateMessageActionTest extends TestCase
         $this->actingAs($this->testUser);
 
         $creator = new CreateMessage();
-        $creator($this->testThread, 'Test message');
+        $creator($this->testThread, 'Message for testing');
 
         $this->assertDatabaseHas('messages', [
             'thread_id' => $this->testThread->id,
             'user_id' => auth()->id(),
-            'body' => 'Test message',
+            'body' => 'Message for testing',
             'seen_at' => null
         ]);
     }

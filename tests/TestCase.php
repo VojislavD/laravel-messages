@@ -5,6 +5,7 @@ namespace VojislavD\LaravelMessages\Tests;
 use Illuminate\Database\Schema\Blueprint;
 use VojislavD\LaravelMessages\Providers\LaravelMessagesServiceProvider;
 use Livewire\LivewireServiceProvider;
+use VojislavD\LaravelMessages\Models\Message;
 use VojislavD\LaravelMessages\Models\Thread;
 use VojislavD\LaravelMessages\Models\User;
 use VojislavD\LaravelMessages\Traits\Migrations;
@@ -16,6 +17,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected $testUser;
 
     protected $testThread;
+
+    protected $testMessage;
 
     public function setUp(): void
     {
@@ -98,5 +101,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ]);
 
         $this->testThread = Thread::create();
+
+        $this->testMessage = Message::create([
+            'thread_id' => $this->testThread->id,
+            'user_id' => $this->testUser->id,
+            'body' => 'Test Message'
+        ]);
     }
 }
