@@ -3,11 +3,13 @@
 namespace VojislavD\LaravelMessages\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use VojislavD\LaravelMessages\Providers\LaravelMessagesServiceProvider;
 use Livewire\LivewireServiceProvider;
 use VojislavD\LaravelMessages\Models\Message;
 use VojislavD\LaravelMessages\Models\Thread;
 use VojislavD\LaravelMessages\Models\User;
+use VojislavD\LaravelMessages\Providers\ActionServiceProvider;
 use VojislavD\LaravelMessages\Traits\Migrations;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -15,6 +17,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     use Migrations;
     
     protected $testUser;
+
+    protected $anotherTestUser;
 
     protected $testThread;
 
@@ -44,7 +48,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         return [
             LivewireServiceProvider::class,
-            LaravelMessagesServiceProvider::class
+            LaravelMessagesServiceProvider::class,
+            ActionServiceProvider::class,
         ];
     }
 
@@ -102,12 +107,28 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
 
+        $this->anotherTestUser = User::create([
+            'name' => 'Another Test User',
+            'email' => 'anothertestuser@example.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        ]);
+
         $this->testThread = Thread::create();
 
         $this->testMessage = Message::create([
             'thread_id' => $this->testThread->id,
             'user_id' => $this->testUser->id,
             'body' => 'Test Message'
+        ]);
+
+        DB::table('thread_participants')->insert([
+            'thread_id' => $this->testThread->id,
+            'user_id' => $this->testUser->id
+        ]);
+
+        DB::table('thread_participants')->insert([
+            'thread_id' => $this->testThread->id,
+            'user_id' => $this->anotherTestUser->id
         ]);
     }
 
