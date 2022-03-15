@@ -1,5 +1,5 @@
 <div 
-    x-data="{ threadSelected: true }"
+    x-data="{ threadSelected: false }"
     class="max-w-7xl mx-auto flex space-x-4 h-[720px]"
 >
     <div class="w-1/4 h-full border border-gray-300 bg-white rounded-lg">
