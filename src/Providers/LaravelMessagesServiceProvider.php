@@ -23,9 +23,13 @@ class LaravelMessagesServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../resources/views/livewire', 'laravel-messages');
 
         if ($this->app->runningInConsole()) {
-                $this->publishes(
-                    $this->getMigrations()
-                , 'laravel-messages-migrations');
+            $this->publishes(
+                $this->getMigrations()
+            , 'laravel-messages-migrations');
+
+            $this->publishes([
+                __DIR__.'/../../config/messages.php' => config_path('messages.php')
+            ], 'laravel-messages-config');
         }
     }
 }
