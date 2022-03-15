@@ -36,7 +36,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $this->tearDownDatabase($this->app);
         $this->cleanState();
         parent::tearDown();
-
     }
 
     public function getEnvironmentSetUp($app)
@@ -63,6 +62,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
             }
 
             unlink(database_path('migrations').'/'. $migration);
+        }
+
+        if (file_exists(config_path('messages.php'))) {
+            unlink(config_path('messages.php'));
         }
     }
 

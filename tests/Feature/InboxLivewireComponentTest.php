@@ -63,7 +63,7 @@ class InboxLivewireComponentTest extends TestCase
 
         Livewire::test('inbox')
             ->set('thread', $this->testThread)
-            ->set('state.body', file_get_contents(__DIR__.'/longTextHelper.txt'))
+            ->set('state.body', file_get_contents(__DIR__.'/../helpers/longText.txt'))
             ->call('submit')
             ->assertHasErrors([
                 'state.body' => 'max'
