@@ -2,15 +2,12 @@
 
 namespace VojislavD\LaravelMessages\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use VojislavD\LaravelMessages\Actions\MarkMessageAsSeen;
 use VojislavD\LaravelMessages\Models\User;
 use VojislavD\LaravelMessages\Tests\TestCase;
 
 class MarkMessageAsSeenActionTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function test_mark_message_as_seen()
     {

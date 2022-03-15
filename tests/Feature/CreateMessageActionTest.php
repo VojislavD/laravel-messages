@@ -2,14 +2,11 @@
 
 namespace VojislavD\LaravelMessages\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use VojislavD\LaravelMessages\Actions\CreateMessage;
 use VojislavD\LaravelMessages\Tests\TestCase;
 
 class CreateMessageActionTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function test_create_message()
     {

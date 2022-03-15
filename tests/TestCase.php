@@ -31,6 +31,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::tearDown();
         $this->cleanState();
+        $this->tearDownDatabase($this->app);
+
     }
 
     public function getEnvironmentSetUp($app)
@@ -107,5 +109,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'user_id' => $this->testUser->id,
             'body' => 'Test Message'
         ]);
+    }
+
+    protected function tearDownDatabase($app)
+    {
+        $app['db']->connection()->getSchemaBuilder()->dropIfExists('users');
+        $app['db']->connection()->getSchemaBuilder()->dropIfExists('threads');
+        $app['db']->connection()->getSchemaBuilder()->dropIfExists('thread_participants');
+        $app['db']->connection()->getSchemaBuilder()->dropIfExists('messages');
     }
 }
