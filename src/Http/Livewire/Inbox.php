@@ -5,8 +5,8 @@ namespace VojislavD\LaravelMessages\Http\Livewire;
 use Livewire\Component;
 use VojislavD\LaravelMessages\Contracts\CreatesMessage;
 use VojislavD\LaravelMessages\Contracts\MarksMessageAsSeen;
-use VojislavD\LaravelMessages\Models\Message;
 use VojislavD\LaravelMessages\Models\Thread;
+use VojislavD\LaravelMessages\Rules\FilterWords;
 
 class Inbox extends Component
 {
@@ -23,7 +23,7 @@ class Inbox extends Component
     public function rules()
     {
         return [
-            'state.body' => ['required', 'string', 'max:5000']
+            'state.body' => ['required', 'string', 'max:5000', new FilterWords]
         ];
     }
 
