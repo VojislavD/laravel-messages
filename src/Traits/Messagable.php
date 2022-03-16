@@ -10,6 +10,6 @@ trait Messagable
 {
     public function threads()
     {
-        return $this->belongsToMany(Thread::class, 'thread_participants');
+        return $this->belongsToMany(Thread::class);
     }
 }

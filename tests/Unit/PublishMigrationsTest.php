@@ -18,7 +18,7 @@ class PublishMigrationsTest extends TestCase
 
         $this->assertCount(3, $migrations);
         $this->assertContains('create_threads_table.php', $migrations);
-        $this->assertContains('create_thread_participants_table.php', $migrations);
+        $this->assertContains('create_thread_user_table.php', $migrations);
         $this->assertContains('create_messages_table.php', $migrations);
 
         $content = scandir(database_path('migrations'));
@@ -29,7 +29,7 @@ class PublishMigrationsTest extends TestCase
         );
 
         $this->assertEquals(
-            file_get_contents(__DIR__.'/../../database/migrations/create_thread_participants_table.stub'),
+            file_get_contents(__DIR__.'/../../database/migrations/create_thread_user_table.stub'),
             file_get_contents(database_path('migrations/'.$content[4]))
         );
 
@@ -43,7 +43,7 @@ class PublishMigrationsTest extends TestCase
     public function test_publish_migrations_when_already_exists()
     {
         $threadsTable = date('Y_m_d_His', time()). '_create_threads_table.php';
-        $threadParticipants = date('Y_m_d_His', time()+1). '_create_thread_participants_table.php';
+        $threadParticipants = date('Y_m_d_His', time()+1). '_create_thread_user_table.php';
         $messagesTable = date('Y_m_d_His', time()+2). '_create_messages_table.php';
 
         File::put(database_path('migrations/'. $threadsTable), 'Threads table');

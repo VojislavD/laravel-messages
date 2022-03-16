@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('thread_participants', function (Blueprint $table) {
+        Schema::create('thread_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('thread_id');
             $table->foreignId('user_id');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thread_participants');
+        Schema::dropIfExists('thread_user');
     }
 };

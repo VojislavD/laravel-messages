@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
-    public function participiants()
+    public function users()
     {
-        return $this->belongsToMany(User::class, 'thread_participants');
+        return $this->belongsToMany(User::class);
     }
 
     public function messages()
@@ -19,7 +19,7 @@ class Thread extends Model
 
     public function otherParticipant()
     {
-        return $this->participiants()->whereNot('user_id', auth()->id());
+        return $this->users()->whereNot('user_id', auth()->id());
     }
 
     public function otherParticipantName(): Attribute

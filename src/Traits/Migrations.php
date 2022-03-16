@@ -14,8 +14,8 @@ trait Migrations
             $migrations[__DIR__.'/../../database/migrations/create_threads_table.stub'] = database_path('migrations/'. date('Y_m_d_His', time()). '_create_threads_table.php');
         }
 
-        if (! in_array('create_thread_participants_table.php', $existingMigrations)) {
-            $migrations[__DIR__.'/../../database/migrations/create_thread_participants_table.stub'] = database_path('migrations/'. date('Y_m_d_His', time()+1). '_create_thread_participants_table.php');
+        if (! in_array('create_thread_user_table.php', $existingMigrations)) {
+            $migrations[__DIR__.'/../../database/migrations/create_thread_user_table.stub'] = database_path('migrations/'. date('Y_m_d_His', time()+1). '_create_thread_user_table.php');
         }
 
         if (! in_array('create_messages_table.php', $existingMigrations)) {

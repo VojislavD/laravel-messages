@@ -88,7 +88,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
             $table->timestamps();
         });
 
-        $app['db']->connection()->getSchemaBuilder()->create('thread_participants', function (Blueprint $table) {
+        $app['db']->connection()->getSchemaBuilder()->create('thread_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('thread_id');
             $table->foreignId('user_id');
@@ -124,12 +124,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'body' => 'Test Message'
         ]);
 
-        DB::table('thread_participants')->insert([
+        DB::table('thread_user')->insert([
             'thread_id' => $this->testThread->id,
             'user_id' => $this->testUser->id
         ]);
 
-        DB::table('thread_participants')->insert([
+        DB::table('thread_user')->insert([
             'thread_id' => $this->testThread->id,
             'user_id' => $this->anotherTestUser->id
         ]);
@@ -139,7 +139,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $app['db']->connection()->getSchemaBuilder()->dropIfExists('users');
         $app['db']->connection()->getSchemaBuilder()->dropIfExists('threads');
-        $app['db']->connection()->getSchemaBuilder()->dropIfExists('thread_participants');
+        $app['db']->connection()->getSchemaBuilder()->dropIfExists('thread_user');
         $app['db']->connection()->getSchemaBuilder()->dropIfExists('messages');
     }
 }
