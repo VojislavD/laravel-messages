@@ -37,6 +37,21 @@ Run migration:
 php artisan migrate"
 ```
 
+In your User model class add `Messagable` trait:
+
+```php
+// App\Models\User.php
+
+use VojislavD\LaravelMessages\Traits\Messagable;
+
+class User extends Authenticatable
+{
+    use Messagable;
+
+    ...
+}
+```
+
 In `tailwind.config.js` file add blade files from this package:
 
 ```js
