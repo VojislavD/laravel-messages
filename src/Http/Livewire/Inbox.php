@@ -4,6 +4,7 @@ namespace VojislavD\LaravelMessages\Http\Livewire;
 
 use Livewire\Component;
 use VojislavD\LaravelMessages\Contracts\CreatesMessage;
+use VojislavD\LaravelMessages\Contracts\CreatesThread;
 use VojislavD\LaravelMessages\Contracts\MarksMessageAsSeen;
 use VojislavD\LaravelMessages\Models\Thread;
 use VojislavD\LaravelMessages\Rules\FilterWords;
@@ -21,7 +22,12 @@ class Inbox extends Component
     protected $listeners = ['refreshComponent' => '$refresh'];
 
     protected $validationAttributes = [
-        'state.body' => 'body'
+        'state.body' => 'body',
+        'state.email' => 'email'
+    ];
+
+    protected $messages = [
+        'state.email.exists' => 'User with that email address does not exists.',
     ];
 
     public function mount()
@@ -30,15 +36,10 @@ class Inbox extends Component
         $this->wirePoll = "wire:poll.".config('messages.update.time') ."ms";
     }
 
-    public function rules()
-    {
-        return [
-            'state.body' => ['required', 'string', 'max:5000', new FilterWords]
-        ];
-    }
-
     public function selectThread(Thread $thread, MarksMessageAsSeen $updater)
     {
+        $this->resetErrorBag();
+
         $this->thread = $thread;
 
         $updater($thread);
@@ -46,9 +47,25 @@ class Inbox extends Component
 
     public function submit(CreatesMessage $creator)
     {
-        $this->validate();
+        $this->validate([
+            'state.body' => ['required', 'string', 'max:5000', new FilterWords]
+        ]);
 
         $creator($this->thread, $this->state['body']);
+
+        $this->reset(['state']);
+
+        $this->emit('refreshComponent');
+    }
+
+    public function newMessageSubmit(CreatesThread $creator)
+    {
+        $this->validate([
+            'state.email' => ['required', 'email', 'exists:users,email'],
+            'state.body' => ['required', 'string', 'max:5000', new FilterWords]
+        ]);
+
+        $creator($this->state);
 
         $this->reset(['state']);
 

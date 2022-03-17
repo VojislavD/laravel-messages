@@ -12,6 +12,8 @@ class Message extends Model
         'body',
         'seen_at'
     ];
+
+    protected $touches = ['thread'];
     
     public function thread()
     {

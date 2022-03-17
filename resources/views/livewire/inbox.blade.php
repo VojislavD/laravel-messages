@@ -1,23 +1,33 @@
 <div 
     @if($autoUpdate) {{ $wirePoll }} @endif
-    x-data="{ threadSelected: false }"
+    x-data="{ threadSelected: false, newMessage: false }"
     class="max-w-7xl mx-auto flex space-x-4 h-[720px]"
 >
     <div class="w-1/4 h-full border border-gray-300 bg-white rounded-lg">
-        <div class="h-[60px] flex items-center p-4 space-x-2 border-b-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+        <div class="h-[60px] flex justify-between p-4 border-b-2">
             <button 
-                @click="threadSelected = false" 
-                class="font-semibold"
+                @click="threadSelected = false; newMessage = false" 
+                class="flex items-center space-x-2 font-semibold"
             >
-                {{ __('Threads') }}
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                <span>
+                    {{ __('Threads') }}
+                </span>
+            </button>
+            <button
+                @click="threadSelected=false; newMessage = true" 
+                title="New Message"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                  </svg>
             </button>
         </div>
         <div class="h-[650px] overflow-y-auto">
             @forelse ($threads as $thread)
                 <button
                     wire:click="selectThread({{ $thread }})"
-                    @click="threadSelected = true" 
+                    @click="newMessage = false; threadSelected = true" 
                     class="w-full py-3 flex items-center justify-between px-2 my-2 hover:bg-blue-500 hover:bg-opacity-20 cursor-pointer"
                 >
                     <div class="flex items-center">
@@ -50,7 +60,7 @@
     <div class="w-3/4 border border-gray-300 bg-white rounded-xl">
         <div 
             class="w-full h-full flex items-center justify-center block" 
-            :class="! threadSelected ? 'block' : 'hidden'"
+            :class="! threadSelected && ! newMessage ? 'block' : 'hidden'"
         >
             <h5 class="text-2xl text-gray-400">
                 {{ __('Select Thread') }}
@@ -141,5 +151,53 @@
                 </form>
             @endif
         </div>
+        <form 
+            class="w-full h-full flex flex-col justify-between block"
+            :class="newMessage ? 'block' : 'hidden'"
+            wire:submit.prevent="newMessageSubmit"
+        >
+            <h5 class="h-[60px] text-lg p-3.5 border-b-2 space-x-2 font-semibold">
+                <span>
+                    {{ __('To') }}:
+                </span>
+                <input 
+                    wire:model.defer="state.email"
+                    type="text" 
+                    placeholder="User email address"
+                    class="text-sm py-1 border-gray-300 focus:border-gray-300 focus:outline-none focus:ring-0 rounded-lg"
+                >
+            </h5>
+            <div 
+                id="messages"
+                x-init="document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight"
+                class="h-[650] flex-1 p-4 border-b-2 space-y-8 overflow-y-auto custom-scrollbar" 
+            >
+                
+            </div>
+            <div class="p-4">
+                <textarea 
+                    wire:model.defer="state.body"
+                    class="w-full h-24 mt-2 border p-2 border-gray-300 focus:border-gray-300 focus:outline-none focus:ring-0 rounded-lg resize-none" 
+                    placeholder="Write your message here..."
+                ></textarea>
+                <div class="flex items-center justify-between">
+                    <div class="flex-1 text-sm text-red-600">
+                        <div>
+                            @error('state.email')
+                                {{ $message }}
+                            @enderror
+                        </div>
+                        <div>
+                            @error('state.body')
+                                {{ $message }}
+                            @enderror
+                        </div>
+                    </div>
+                    <button class="bg-blue-600 hover:bg-blue-800 rounded-lg mt-4 px-10 py-1.5 text-gray-100 hover:shadow-xl transition duration-150">
+                        {{ __('Send') }}
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
