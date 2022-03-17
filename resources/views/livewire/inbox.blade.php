@@ -1,9 +1,9 @@
 <div 
     @if($autoUpdate) {{ $wirePoll }} @endif
     x-data="{ threadSelected: false, newMessage: false }"
-    class="max-w-7xl mx-auto flex space-x-4 h-[720px]"
+    class="max-w-7xl mx-auto flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 lg:h-[720px] px-4"
 >
-    <div class="w-1/4 h-full border border-gray-300 bg-white rounded-lg">
+    <div class="w-full lg:w-1/3 xl:w-1/4 h-auto lg:h-full border border-gray-300 bg-white rounded-lg">
         <div class="h-[60px] flex justify-between p-4 border-b-2">
             <button 
                 @click="threadSelected = false; newMessage = false" 
@@ -23,7 +23,7 @@
                   </svg>
             </button>
         </div>
-        <div class="h-[650px] overflow-y-auto">
+        <div class="max-h-[650px] lg:h-[650px] overflow-y-auto">
             @forelse ($threads as $thread)
                 <button
                     wire:click="selectThread({{ $thread }})"
@@ -57,17 +57,17 @@
             @endforelse
         </div>
     </div>
-    <div class="w-3/4 border border-gray-300 bg-white rounded-xl">
+    <div class="w-full lg:w-2/3 xl:w-3/4 border border-gray-300 bg-white rounded-xl">
         <div 
-            class="w-full h-full flex items-center justify-center block" 
+            class="w-full max-h-[720px] lg:h-full flex items-center justify-center block" 
             :class="! threadSelected && ! newMessage ? 'block' : 'hidden'"
         >
-            <h5 class="text-2xl text-gray-400">
+            <h5 class="text-2xl text-gray-400 py-8 lg:py-0">
                 {{ __('Select Thread') }}
             </h5>
         </div>
         <div 
-            class="w-full h-full flex flex-col justify-between block"
+            class="w-full max-h-[720px] lg:h-full flex flex-col justify-between block"
             :class="threadSelected ? 'block' : 'hidden'"
         >
             @if($messages)
