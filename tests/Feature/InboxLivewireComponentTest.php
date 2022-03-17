@@ -41,7 +41,7 @@ class InboxLivewireComponentTest extends TestCase
     }
 
     /** @test */
-    public function test_validation()
+    public function test_validation_for_new_message()
     {
         $this->actingAs($this->testUser);
 
@@ -71,6 +71,45 @@ class InboxLivewireComponentTest extends TestCase
     }
 
     /** @test */
+    public function test_validation_for_new_thread()
+    {
+        $this->actingAs($this->testUser);
+
+        Livewire::test('inbox')
+            ->set('state.email', '')
+            ->set('state.body', '')
+            ->call('newMessageSubmit')
+            ->assertHasErrors([
+                'state.body' => 'required',
+                'state.email' => 'required'
+            ]);
+
+        Livewire::test('inbox')
+            ->set('state.email', 'notvalidemail')
+            ->set('state.body', 1)
+            ->call('newMessageSubmit')
+            ->assertHasErrors([
+                'state.email' => 'email',
+                'state.body' => 'string'
+            ]);
+
+        Livewire::test('inbox')
+            ->set('state.email', 'notexistingemail@example.com')
+            ->set('state.body', file_get_contents(__DIR__.'/../helpers/longText.txt'))
+            ->call('newMessageSubmit')
+            ->assertHasErrors([
+                'state.email' => 'exists',
+                'state.body' => 'max'
+            ]);
+
+        Livewire::test('inbox')
+            ->set('state.email', $this->anotherTestUser->email)
+            ->set('state.body', 'Some body for message')
+            ->call('newMessageSubmit')
+            ->assertHasNoErrors();
+    }
+
+    /** @test */
     public function test_create_new_message()
     {
         $this->actingAs($this->testUser);
@@ -84,6 +123,30 @@ class InboxLivewireComponentTest extends TestCase
 
         $this->assertDatabaseHas('messages', [
             'body' => 'Message created from test.',
+        ]);
+    }
+
+    /** @test */
+    public function test_create_new_thread()
+    {
+        $this->actingAs($this->testUser);
+
+        $this->assertDatabaseCount('threads', 1);
+        $this->assertDatabaseCount('thread_user', 2);
+
+        Livewire::test('inbox')
+            ->set('state.email', $this->anotherTestUser->email)
+            ->set('state.body', 'Message created from test for new thread')
+            ->call('newMessageSubmit')
+            ->assertHasNoErrors();
+
+        $this->assertDatabaseCount('threads', 2);
+        $this->assertDatabaseCount('thread_user', 4);
+
+        $this->assertDatabaseHas('messages', [
+            'user_id' => auth()->id(),
+            'body' => 'Message created from test for new thread',
+            'seen_at' => null
         ]);
     }
 }
