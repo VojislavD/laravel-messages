@@ -36,6 +36,10 @@ class LaravelMessagesServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../../config/messages.php' => config_path('messages.php')
             ], 'laravel-messages-config');
+
+            $this->publishes([
+                __DIR__.'/../../resources/views/livewire/inbox.blade.php' => resource_path('/views/vendor/laravel-messages/inbox.blade.php')
+            ], 'laravel-messages-views');
         }
     }
 }
