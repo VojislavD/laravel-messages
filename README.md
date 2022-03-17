@@ -87,6 +87,12 @@ Component have basic filter for forbidden words. In config file you can configur
 ],
 ```
 
+### Change Style Of Component
+If you want to change style of component you need to publish view file
+```bash
+php artisan vendor:publish --tag="laravel-messages-views"
+```
+
 ## Testing
 Run the tests with:
 
