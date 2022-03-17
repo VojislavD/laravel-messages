@@ -12,7 +12,7 @@ return [
     */
     'update' => [
         'auto' => false,
-        'time' => 750 // milliseconds
+        'interval' => 750 // milliseconds
     ],
 
     /*
@@ -20,9 +20,9 @@ return [
     | Filter Messages For Forbidden Words
     |--------------------------------------------------------------------------
     |
-    | This option filters messages for forbidden words. You can check if the 
+    | This option filters messages for forbidden words or text. You can check if the 
     | message has some exact word, or you can check if the message contains 
-    | some forbidden word. 
+    | some forbidden text.
     |
     */
     'validation' => [
