@@ -10,7 +10,7 @@ class MarkMessageAsSeen implements MarksMessageAsSeen
     public function __invoke(Thread $thread)
     {
         $thread
-            ->messages
+            ->messages()
             ->where('user_id', '!=', auth()->id())
             ->each(function ($message) {
                 $message->update([
