@@ -173,7 +173,7 @@
                     wire:model.defer="state.email"
                     type="text" 
                     placeholder="User email address"
-                    class="text-sm py-1 border-gray-300 focus:border-gray-300 focus:outline-none focus:ring-0 rounded-lg"
+                    class="w-64 text-sm py-1 border-gray-300 focus:border-gray-300 focus:outline-none focus:ring-0 rounded-lg"
                 >
             </h5>
             <div 
