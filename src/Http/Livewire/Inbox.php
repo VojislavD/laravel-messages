@@ -2,6 +2,7 @@
 
 namespace VojislavD\LaravelMessages\Http\Livewire;
 
+use Illuminate\Contracts\Support\Renderable;
 use Livewire\Component;
 use VojislavD\LaravelMessages\Contracts\CreatesMessage;
 use VojislavD\LaravelMessages\Contracts\CreatesThread;
@@ -11,31 +12,61 @@ use VojislavD\LaravelMessages\Rules\FilterWords;
 
 class Inbox extends Component
 {
+    /**
+     * @var bool
+     */
     public $autoUpdate;
 
+    /**
+     * @var string
+     */
     public $wirePoll;
 
+    /**
+     * @var \VojislavD\LaravelMessages\Models\Thread
+     */
     public $thread;
     
+    /**
+     * @var array<string, string>
+     */
     public $state = [];
 
+    /**
+     * @var array<string, string>
+     */
     protected $listeners = ['refreshComponent' => '$refresh'];
 
+    /**
+     * @var array<string, string>
+     */
     protected $validationAttributes = [
         'state.body' => 'body',
         'state.email' => 'email'
     ];
 
+    /**
+     * @var array<string, string>
+     */
     protected $messages = [
         'state.email.exists' => 'User with that email address does not exists.',
     ];
 
+    /**
+     * @return void
+     */
     public function mount()
     {
         $this->autoUpdate = config('messages.update.auto');
         $this->wirePoll = "wire:poll.".config('messages.update.time') ."ms";
     }
 
+    /**
+     * @param \VojislavD\LaravelMessages\Models\Thread $thread
+     * @param \VojislavD\LaravelMessages\Contracts\MarksMessageAsSeen $updater
+     * 
+     * @return void
+     */
     public function selectThread(Thread $thread, MarksMessageAsSeen $updater)
     {
         $this->resetErrorBag();
@@ -45,6 +76,11 @@ class Inbox extends Component
         $updater($thread);
     }
 
+    /**
+     * @param \VojislavD\LaravelMessages\Contracts\CreatesMessage $creator
+     * 
+     * @return void
+     */
     public function submit(CreatesMessage $creator)
     {
         $this->validate([
@@ -58,6 +94,11 @@ class Inbox extends Component
         $this->emit('refreshComponent');
     }
 
+    /**
+     * @param \VojislavD\LaravelMessages\Contracts\CreatesThread $creator
+     * 
+     * @return void
+     */
     public function newMessageSubmit(CreatesThread $creator)
     {
         $this->validate([
@@ -72,6 +113,9 @@ class Inbox extends Component
         $this->emit('refreshComponent');
     }
 
+    /**
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function render()
     {
         $threads = auth()->user()->threads()->with('otherParticipant')->latest()->get();

@@ -11,6 +11,9 @@ use VojislavD\LaravelMessages\Contracts\MarksMessageAsSeen;
 
 class ActionServiceProvider extends LaravelMessagesServiceProvider
 {
+    /**
+     * @var array
+     */
     public $bindings = [
         CreatesMessage::class => CreateMessage::class,
         MarksMessageAsSeen::class => MarkMessageAsSeen::class,

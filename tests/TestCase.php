@@ -15,15 +15,30 @@ use VojislavD\LaravelMessages\Traits\Migrations;
 class TestCase extends \Orchestra\Testbench\TestCase
 {
     use Migrations;
-    
+
+    /**
+     * @var \VojislavD\LaravelMessages\Models\User
+     */
     protected $testUser;
 
+    /**
+     * @var \VojislavD\LaravelMessages\Models\User
+     */
     protected $anotherTestUser;
 
+    /**
+     * @var \VojislavD\LaravelMessages\Models\Thread
+     */
     protected $testThread;
 
+    /**
+     * @var \VojislavD\LaravelMessages\Models\Message
+     */
     protected $testMessage;
 
+    /**
+     * @return void
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -31,6 +46,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $this->setUpDatabase($this->app);
     }
 
+    /**
+     * @return void
+     */
     public function tearDown(): void
     {
         $this->tearDownDatabase($this->app);
@@ -38,11 +56,21 @@ class TestCase extends \Orchestra\Testbench\TestCase
         parent::tearDown();
     }
 
+    /**
+     * @param \Illuminate\Foundation\Application $app
+     * 
+     * @return void
+     */
     public function getEnvironmentSetUp($app)
     {
         
     }
 
+    /**
+     * @param \Illuminate\Foundation\Application $app
+     * 
+     * @return array
+     */
     public function getPackageProviders($app)
     {
         return [
@@ -52,6 +80,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ];
     }
 
+    /**
+     * @return void
+     */
     private function cleanState()
     {
         $migrations = scandir(database_path('migrations'));
@@ -69,6 +100,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
         }
     }
 
+    /**
+     * @param \Illuminate\Foundation\Application $app
+     * 
+     * @return void
+     */
     protected function setUpDatabase($app)
     {
         $app['db']->connection()->getSchemaBuilder()->create('users', function (Blueprint $table) {
@@ -135,6 +171,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ]);
     }
 
+    /**
+     * @param \Illuminate\Foundation\Application $app
+     * 
+     * @return void
+     */
     protected function tearDownDatabase($app)
     {
         $app['db']->connection()->getSchemaBuilder()->dropIfExists('users');

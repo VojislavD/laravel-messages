@@ -11,9 +11,7 @@ class User extends Authenticatable
     use Messagable;
     
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
@@ -21,6 +19,9 @@ class User extends Authenticatable
         'password',
     ];
 
+    /**
+     * @return string
+     */
     public function getProfilePhotoUrlAttribute()
     {
         return $this->profile_photo_path
@@ -28,6 +29,9 @@ class User extends Authenticatable
                     : $this->defaultProfilePhotoUrl();
     }
 
+    /**
+     * @return string
+     */
     protected function defaultProfilePhotoUrl()
     {
         $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
@@ -37,6 +41,9 @@ class User extends Authenticatable
         return 'https://ui-avatars.com/api/?name='.urlencode($name).'&color=7F9CF5&background=EBF4FF';
     }
 
+    /**
+     * @return string
+     */
     protected function profilePhotoDisk()
     {
         return isset($_ENV['VAPOR_ARTIFACT_NAME']) ? 's3' : config('jetstream.profile_photo_disk', 'public');

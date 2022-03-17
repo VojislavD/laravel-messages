@@ -4,6 +4,9 @@ namespace VojislavD\LaravelMessages\Traits;
 
 trait Migrations
 {
+    /**
+     * @return array<string, string>
+     */
     public function getMigrations()
     {
         $existingMigrations = $this->existingMigrations();
@@ -25,6 +28,9 @@ trait Migrations
         return $migrations;
     }
     
+    /**
+     * @return array<int, string>
+     */
     public function existingMigrations()
     {
         $files = scandir(database_path('migrations'));
@@ -34,7 +40,7 @@ trait Migrations
         foreach ($files as $file) {
             $existingMigrations[] = substr($file, 18, strlen($file) - 16);
         }
-
+        
         return $existingMigrations;
     }
 }

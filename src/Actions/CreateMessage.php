@@ -8,6 +8,12 @@ use VojislavD\LaravelMessages\Models\Thread;
 
 class CreateMessage implements CreatesMessage
 {
+    /**
+     * @param \VojislavD\LaravelMessages\Models\Thread $thread
+     * @param string $body
+     * 
+     * @return void
+     */
     public function __invoke(Thread $thread, string $body)
     {
         Message::create([

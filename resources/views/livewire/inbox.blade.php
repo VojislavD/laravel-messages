@@ -6,7 +6,10 @@
     <div class="w-full lg:w-1/3 xl:w-1/4 h-auto lg:h-full border border-gray-300 bg-white rounded-lg">
         <div class="h-[60px] flex justify-between p-4 border-b-2">
             <button 
-                @click="threadSelected = false; newMessage = false" 
+                @click="
+                    threadSelected = false; 
+                    newMessage = false
+                " 
                 class="flex items-center space-x-2 font-semibold"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
@@ -15,7 +18,10 @@
                 </span>
             </button>
             <button
-                @click="threadSelected=false; newMessage = true" 
+                @click="
+                    threadSelected=false; 
+                    newMessage = true
+                " 
                 title="New Message"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -27,7 +33,10 @@
             @forelse ($threads as $thread)
                 <button
                     wire:click="selectThread({{ $thread }})"
-                    @click="newMessage = false; threadSelected = true" 
+                    @click="
+                        newMessage = false; 
+                        threadSelected = true
+                    " 
                     class="w-full py-3 flex items-center justify-between px-2 my-2 hover:bg-blue-500 hover:bg-opacity-20 cursor-pointer"
                 >
                     <div class="flex items-center">

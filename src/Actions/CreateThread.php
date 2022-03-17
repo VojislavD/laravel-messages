@@ -8,6 +8,11 @@ use VojislavD\LaravelMessages\Models\User;
 
 class CreateThread implements CreatesThread
 {
+    /**
+     * @param array $params
+     * 
+     * @return void
+     */
     public function __invoke(array $params)
     {
         $thread = Thread::create();

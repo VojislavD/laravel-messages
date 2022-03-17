@@ -2,12 +2,13 @@
 
 namespace VojislavD\LaravelMessages\Traits;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Support\Facades\Storage;
 use VojislavD\LaravelMessages\Models\Thread;
 
 trait Messagable
 {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function threads()
     {
         return $this->belongsToMany(Thread::class);

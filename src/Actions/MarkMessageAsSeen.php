@@ -7,6 +7,11 @@ use VojislavD\LaravelMessages\Models\Thread;
 
 class MarkMessageAsSeen implements MarksMessageAsSeen
 {
+    /**
+     * @param \VojislavD\LaravelMessages\Models\Thread $thread
+     * 
+     * @return void
+     */
     public function __invoke(Thread $thread)
     {
         $thread

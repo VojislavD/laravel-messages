@@ -11,11 +11,17 @@ class LaravelMessagesServiceProvider extends ServiceProvider
 {
     use Migrations;
 
+    /**
+     * @return void
+     */
     public function register()
     {
         
     }
 
+    /**
+     * @return void
+     */
     public function boot()
     {
         Livewire::component('inbox', Inbox::class);
