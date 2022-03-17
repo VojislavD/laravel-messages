@@ -2,15 +2,15 @@
 
 ---
 
-This package add messages system to Laravel application based on <a href="https://tallstack.dev/" target="_blank">TALL stack</a> (Tailwind CSS, Alpine.js, Laravel, Livewire).
+This package adds messages system to Laravel application based on <a href="https://tallstack.dev/" target="_blank">TALL stack</a> (Tailwind CSS, Alpine.js, Laravel, Livewire).
 
 <img src="https://user-images.githubusercontent.com/23532087/158830293-54bb73e1-acae-44f8-a52a-d2b0149865e4.gif">
 
 ## Requirments
 
-This package is compatible with <a href="https://jetstream.laravel.com/" target="_blank">Laravel Jetstream</a> package for Livewire stack. If you have it installed and working there are no futher steps required.
+This package is compatible with <a href="https://jetstream.laravel.com/" target="_blank">Laravel Jetstream</a> package for Livewire stack. If you have it installed and working there are no further steps required.
 
-If you don't have Laravel Jetstream you need to have some sort of authentication because package use Laravels Authenticatable class to get authneticated user.
+If you don't have Laravel Jetstream, you need to have some sort of authentication because the package use Laravels Authenticatable class to get authenticated user.
 Also, you need to have already installed and working Tailwind CSS, Alpine.js and Livewire.
 
 ## Installation
@@ -37,7 +37,7 @@ Run migration:
 php artisan migrate"
 ```
 
-In `tailwind.config.js` file add blade files from this package
+In `tailwind.config.js` file add blade files from this package:
 
 ```js
 module.exports = {
@@ -51,14 +51,14 @@ module.exports = {
 };
 ```
 
-Install dependencies and run build process
+Install dependencies and run build process:
 ```bash
 npm install && npm run dev
 ```
 
 ## Usage
 
-Include component to your HTML page
+Include the component to your HTML page:
 
 ```html
 @livewire('inbox')
@@ -76,7 +76,7 @@ In config file `config\messages.php` you can configure component to automaticall
 By default, auto refresh option is disabled.
 
 ### Filter Forbidden Words
-Component have basic filter for forbidden words. In config file you can configure words to be filtered with option to filter exact words or contain text.
+The Component has a basic filter for forbidden words. In config file you can configure words to be filtered with option to filter exact words or contain text.
 
 ```php
 'validation' => [
@@ -88,13 +88,13 @@ Component have basic filter for forbidden words. In config file you can configur
 ```
 
 ### Change Style Of Component
-If you want to change style of component you need to publish view file
+If you want to change style of component, you need to publish view file.
 ```bash
 php artisan vendor:publish --tag="laravel-messages-views"
 ```
 
 ## Testing
-Run the tests with:
+Run tests with:
 
 ```bash
 composer test

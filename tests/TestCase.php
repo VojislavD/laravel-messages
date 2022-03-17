@@ -98,6 +98,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
         if (file_exists(config_path('messages.php'))) {
             unlink(config_path('messages.php'));
         }
+
+        if (file_exists(resource_path('/views/vendor/laravel-messages/inbox.blade.php'))) {
+            unlink(resource_path('/views/vendor/laravel-messages/inbox.blade.php'));
+            rmdir(resource_path('/views/vendor/laravel-messages'));
+            rmdir(resource_path('/views/vendor/'));
+        }
     }
 
     /**
