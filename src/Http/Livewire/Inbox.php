@@ -2,7 +2,7 @@
 
 namespace VojislavD\LaravelMessages\Http\Livewire;
 
-use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use VojislavD\LaravelMessages\Contracts\CreatesMessage;
 use VojislavD\LaravelMessages\Contracts\CreatesThread;
@@ -102,7 +102,7 @@ class Inbox extends Component
     public function newMessageSubmit(CreatesThread $creator)
     {
         $this->validate([
-            'state.email' => ['required', 'email', 'exists:users,email'],
+            'state.email' => ['required', 'email', 'exists:users,email', Rule::notIn([auth()->user()->email])],
             'state.body' => ['required', 'string', 'max:5000', new FilterWords]
         ]);
 
