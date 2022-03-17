@@ -4,6 +4,8 @@
 
 This package add messages system to Laravel application based on <a href="https://tallstack.dev/" target="_blank">TALL stack</a> (Tailwind CSS, Alpine.js, Laravel, Livewire).
 
+<img src="https://user-images.githubusercontent.com/23532087/158830293-54bb73e1-acae-44f8-a52a-d2b0149865e4.gif">
+
 ## Requirments
 
 This package is compatible with <a href="https://jetstream.laravel.com/" target="_blank">Laravel Jetstream</a> package for Livewire stack. If you have it installed and working there are no futher steps required.
