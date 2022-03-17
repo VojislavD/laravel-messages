@@ -34,7 +34,7 @@ php artisan vendor:publish --tag="laravel-messages-config"
 Run migration:
 
 ```bash
-php artisan migrate"
+php artisan migrate
 ```
 
 In your User model class add `Messagable` trait:
